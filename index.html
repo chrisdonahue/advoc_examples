@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adversarial Vocoding</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style type="text/css">
+            table, th, td {
+              border: 1px solid black;
+            }
+            audio { width: 250px; }
+        </style>
+    </head>
+    <body>
+        <div id = "Inversion">
+            <h2>Ablation Study: Mag Estimation + Phase Estimation Methods: Tacotron-2 generated Spectrogram Vocoding</h2>
+            <table id = "InversionTable">
+              <tr class = "theader">
+              </tr>
+            </table>
+        </div>
+
+        <div id = "Real">
+            <h2>LJ SPeech: Real Mel Spectrogram Vocoding</h2>
+            <table id = "realTable">
+              <tr class = "theader">
+              </tr>
+            </table>
+        </div>
+        
+        <div id = "TTS">
+            <h2>LJ SPeech: Tacotron-2 generated Spectrogram Vocoding</h2>
+            <table id = "TTSTable">
+              <tr class = "theader">
+              </tr>
+            </table>
+        </div>
+        
+        <div id = "Jokes">
+            <h2>Jokes: Tacotron-2 generated Spectrogram Vocoding</h2>
+            <table id = "JokesTable">
+              <tr class = "theader">
+              </tr>
+            </table>
+        </div>
+
+
+
+    </body>
+
+    <script type="text/javascript">
+        function fillTable(table_id, subFolder, methods, method_names, transcripts){
+            var audio_html_pre = '<audio controls><source src="'
+            var audio_html_post = '" type="audio/wav">Your browser does not support the audio tag</audio>'
+            $(table_id).find('.theader').append("<th>Method</th>");
+            for(var j = 0; j < 4; j++){
+                $(table_id).find('.theader').append("<th> Audio " + (j + 1) + "</th>");
+            }
+            if(transcripts.length > 0){
+                var trow = "<tr>"
+                trow += "<td></td>";
+                for(var ti = 0; ti < transcripts.length; ti++){
+                    trow += "<td>" + transcripts[ti] + "</td>";
+                }
+                trow += "</tr>"
+               $(table_id).find('tbody').append( trow ); 
+            }
+            for(var i = 0; i < methods.length; i++){
+
+                var trow = "<tr>"
+                trow += "<td style='word-wrap: break-word; width : 200px;'>" +  method_names[i] + "</td>"
+                for(var j = 0; j < 4; j++){
+                    trow += "<td>"+ audio_html_pre + subFolder + "/" + methods[i] + "/" + (j+1) + ".wav" +audio_html_post +  "</td>";    
+                }
+                trow += "</tr>"
+                $(table_id).find('tbody').append( trow );
+            }
+        }
+
+        var tts_texts = [
+            "The Service should consider preparing formal explanations of the cooperation anticipated during a Presidential visit to a city",
+            "and reports from other agencies which independently evaluate their information for potential sources of danger.",
+            "These substitute measures were of limited value. Agent Lawson was unable to state whether he had actually instructed",
+            "this Commission has necessarily examined into the functioning of the various Federal agencies concerned with the tragic trip of President Kennedy to Dallas",
+        ]
+
+        var jokes_texts = [
+            "Have you heard about the corduroy pillow? No? Really? It’s making headlines!",
+            "Why do chicken coups always have two doors? With four, they’d be chicken sedans.",
+            "What did one shark say to the other as he ate a clownfish? Well this tastes a little funny.",
+            "Why wouldn’t the shrimp share his treasure? Because he was a little shellfish."
+        ]
+
+
+
+        fillTable('#realTable', 
+            'audio/Real', 
+            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            []
+            )
+
+        fillTable('#TTSTable', 
+            'audio/TTS', 
+            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            tts_texts
+            )
+
+        // fillTable('#JokesTable', 
+        //     'audio/Jokes', 
+        //     ['Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+        //     ['Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+        //     jokes_texts
+        //     )
+
+       
+        
+        fillTable('#InversionTable', 
+            'audio/Inversion', 
+            ['Real', 'Mag_GL', 'Mag_LWS', 'Mel_Phase', 'Mel_GL', 'Mel_LWS'],
+            ['Real Mag + Real Phase', 'Real Mag + GL', 'Real Mag + LWS', 'Psuedo Inverse + Real Phase', 'Psuedo Inverse + GL', 'Psuedo Inverse + LWS'],
+            jokes_texts
+            )
+
+         fillTable('#JokesTable', 
+            'audio/Jokes', 
+            ['Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            ['Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            jokes_texts
+            )
+
+    </script>
+
+</html>
+
