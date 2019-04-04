@@ -8,36 +8,49 @@
             table, th, td {
               border: 1px solid black;
             }
-            audio { width: 250px; }
+            td {width: 230px;}
+            audio { width: 230px; }
+            .divexamples {padding-bottom: 30px;}
         </style>
     </head>
     <body>
-        <div id = "Inversion">
-            <h2>Ablation Study: Mag Estimation + Phase Estimation Methods: Tacotron-2 generated Spectrogram Vocoding</h2>
+        <h1>Expediting TTS Synthesis with Adversarial Vocoding</h1>
+        <h3><a href="https://paarthneekhara.github.io">*Paarth Neekhara</a>, <a href="https://chrisdonahue.github.io">*Chris Donahue</a>, <a href="http://msp.ucsd.edu">Miller Puckette</a>, <a href="http://dub.ucsd.edu">Shlomo Dubnov</a>, <a href="http://cseweb.ucsd.edu/~jmcauley/">Julian McAuley</a> </h3>
+        <p style="width: 80%">
+            We present sound examples for our experiments in "Expediting TTS Synthesis with Adversarial Vocoding". 
+            Each mel-spectrogram is vocoded using different methods and we present the vocoded audio for 5 such randomly selected mel-spectrogram representations from the <a href="https://keithito.com/LJ-Speech-Dataset/"> LJ Speech Dataset</a>. Additionally, we present TTS examples for vocoding <a href="https://arxiv.org/abs/1712.05884">Tacotron-2</a> generated mel-spectrograms for some jokes.
+        </p>
+
+        <div class = "divexamples" id = "Inversion">
+            <h2>Ablation study: magnitude and phase estimation</h2>
+            <p style="width: 80%">Sound examples for ablating the heuristics for magnitude and phase estimation for vocoding mel spectrograms. It can be observed that coupling an ideal estimation of phase or magnitude with a heuristic for the other yields audio quality that is marginally worse than the original audio.</p>
             <table id = "InversionTable">
               <tr class = "theader">
               </tr>
             </table>
         </div>
 
-        <div id = "Real">
-            <h2>LJ SPeech: Real Mel Spectrogram Vocoding</h2>
+        <div class = "divexamples" id = "Real">
+            <h2>Real Mel Spectrograms</h2>
+            <p style="width: 80%">Sound examples for vocoding mel-spectrograms of audio utterances from our test data set.</p>
             <table id = "realTable">
               <tr class = "theader">
               </tr>
             </table>
         </div>
-        
-        <div id = "TTS">
-            <h2>LJ SPeech: Tacotron-2 generated Spectrogram Vocoding</h2>
+
+        <div class = "divexamples" id = "TTS">
+            <h2><a href="https://arxiv.org/abs/1712.05884">Tacotron-2</a> Generated Mel Spectrograms</h2>
+            <p style="width: 80%">Sound examples for vocoding <a href="https://arxiv.org/abs/1712.05884">Tacotron-2</a> generated synthetic mel-spectrograms for audio transcriptions of the same set of audio utterances as used in the other examples.</p>
             <table id = "TTSTable">
               <tr class = "theader">
               </tr>
             </table>
         </div>
         
-        <div id = "Jokes">
-            <h2>Jokes: Tacotron-2 generated Spectrogram Vocoding</h2>
+        <div class = "divexamples" id = "Jokes">
+            <h2>Jokes</h2>
+            <p style="width: 80%">Sound examples for vocoding <a href="https://arxiv.org/abs/1712.05884">Tacotron-2</a> generated synthetic mel-spectrograms for some jokes :) </p>
             <table id = "JokesTable">
               <tr class = "theader">
               </tr>
@@ -86,7 +99,7 @@
 
         var jokes_texts = [
             "Have you heard about the corduroy pillow? No? Really? It’s making headlines!",
-            "Why do chicken coups always have two doors? With four, they’d be chicken sedans.",
+            "Why do chicken coups always have two doors? With four, they'd be chicken sedans.",
             "What did one shark say to the other as he ate a clownfish? Well this tastes a little funny.",
             "Why wouldn’t the shrimp share his treasure? Because he was a little shellfish."
         ]
@@ -95,15 +108,15 @@
 
         fillTable('#realTable', 
             'audio/Real', 
-            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
-            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
-            []
+            ['Real', 'Pinv', 'Wavenet', 'Waveglow', 'Advoc', 'Advoc_small'],
+            ['Real data', 'Psuedoinv', '<a href="https://arxiv.org/abs/1609.03499">WaveNet</a>', '<a href="https://arxiv.org/abs/1811.00002">WaveGlow</a>',  '<b>AdVoc</b>', '<b>AdVoc-small</b>'],
+            tts_texts
             )
 
         fillTable('#TTSTable', 
             'audio/TTS', 
-            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
-            ['Real', 'Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            ['Real', 'Pinv', 'Wavenet', 'Waveglow', 'Advoc', 'Advoc_small'],
+            ['Real data', 'Psuedoinv', '<a href="https://arxiv.org/abs/1609.03499">WaveNet</a>', '<a href="https://arxiv.org/abs/1811.00002">WaveGlow</a>',  '<b>AdVoc</b>', '<b>AdVoc-small</b>'],
             tts_texts
             )
 
@@ -119,14 +132,14 @@
         fillTable('#InversionTable', 
             'audio/Inversion', 
             ['Real', 'Mag_GL', 'Mag_LWS', 'Mel_Phase', 'Mel_GL', 'Mel_LWS'],
-            ['Real Mag + Real Phase', 'Real Mag + GL', 'Real Mag + LWS', 'Psuedo Inverse + Real Phase', 'Psuedo Inverse + GL', 'Psuedo Inverse + LWS'],
-            jokes_texts
+            ['Real Mag + Real Phase (Original)', 'Real Mag + Griffin Lim', 'Real Mag + LWS', 'Mel psuedoinverse + Real Phase', 'Mel psuedoinverse + Griffin Lim', 'Mel psuedoinverse + LWS'],
+            tts_texts
             )
 
          fillTable('#JokesTable', 
             'audio/Jokes', 
-            ['Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
-            ['Pinv', 'Advoc', 'Advoc_small', 'Wavenet', 'Waveglow'],
+            ['Pinv', 'Wavenet', 'Waveglow', 'Advoc', 'Advoc_small'],
+            ['Psuedoinv', '<a href="https://arxiv.org/abs/1609.03499">WaveNet</a>', '<a href="https://arxiv.org/abs/1811.00002">WaveGlow</a>',  '<b>AdVoc</b>', '<b>AdVoc-small</b>'],
             jokes_texts
             )
 
