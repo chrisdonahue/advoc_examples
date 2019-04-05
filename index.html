@@ -57,6 +57,66 @@
             </table>
         </div>
 
+        <div class="divexamples" id = "sc09">
+            <h2>Unsupervised Audio Synthesis - SC09</h2>
+            Sound examples for unsupervised audio synthesis task for the SC09 digit generation task. The goal is to generate spoken digits from "zero" through "nine" without supervision. We train a GAN to generate mel-spectrograms for the SC09 dataset and vocode the generated output using our adversarial vocoding method. Our adversarial-vocoding based method outperforms our previous results using the inception score and human judgement based metrics.
+            <!-- When trained on this dataset <i>without</i> label conditioning, our WaveGAN and SpecGAN models learn to generate coherent words. Results are arranged into numerical ordering by post-hoc labeling of random examples by the classifier discussed in the paper. -->
+            <ul>
+
+                <li>
+                <span class="desc">
+                  Real data
+                </span>
+                <div class="example">
+                  <audio controls>
+                  <source src="audio/SC09/real.wav" type="audio/wav">
+                  Your browser does not support the audio tag.
+                </audio>
+                </div>
+                </li>
+
+
+                <li>
+                <span class="desc">
+                  <a href="https://arxiv.org/abs/1802.04208">WaveGAN</a>
+                </span>
+                <div class="example">
+                  <audio controls>
+                  <source src="audio/SC09/wavegan.wav" type="audio/wav">
+                  Your browser does not support the audio tag.
+                </audio>
+                </div>
+                </li>
+
+
+                <li>
+                <span class="desc">
+                  <a href="https://arxiv.org/abs/1802.04208">SpecGAN + Griffin Lim</a>
+                </span>
+                <div class="example">
+                  <audio controls>
+                  <source src="audio/SC09/specgan_gl.wav" type="audio/wav">
+                  Your browser does not support the audio tag.
+                </audio>
+                </div>
+                </li>
+
+                <li>
+                <span class="desc">
+                  
+                  <b>SpecGAN + AdVoc</b>
+
+                </span>
+                <div class="example">
+                  <audio controls>
+                  <source src="audio/SC09/specgan_advoc.wav" type="audio/wav">
+                  Your browser does not support the audio tag.
+                </audio>
+                </div>
+                </li>
+
+            </ul>
+        </div>
 
 
     </body>
