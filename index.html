@@ -60,7 +60,7 @@
         <div class="divexamples" id = "sc09">
             <h2>(Table 3) Unsupervised generation of small-vocabulary speech</h2>
 	    <p style="width: 80%">
-	    Here we are concerned with <i>unsupervised</i> generation of speech (as opposed to supervised generation or TTS). The goal here is to train a system which can learn to speak coherent English words <i>without</i> labels. Specifically, we wish to generate spoken digits (i.e. 10 words "zero" through "nine"). Our <a href="https://arxiv.org/abs/1802.04208">previous work</a> attempts to do this directly in the waveform domain (WaveGAN) and also in a naive spectrogram domain combined with Griffin-Lim for heuristic inversion (SpecGAN). Here we show that we can get substantially higher-quality results by first training a GAN to generate mel spectrograms (MelSpecGan) and then training an adversarial vocoder to vocode those spectrograms into audio.</p>
+	    Here we are concerned with <i>unsupervised</i> generation of speech (as opposed to supervised as in TTS). The goal here is to train a system which can learn to speak coherent English words <i>without</i> labels. Specifically, we wish to generate spoken digits (i.e. 10 words "zero" through "nine"). Our <a href="https://arxiv.org/abs/1802.04208">previous work</a> attempts to do this directly in the waveform domain (WaveGAN) and also in a naive spectrogram domain combined with Griffin-Lim for heuristic inversion (SpecGAN). Here we show that we can get substantially higher-quality results by first training a GAN to generate mel spectrograms (MelSpecGAN) and then training an adversarial vocoder to vocode those spectrograms into audio.</p>
             <!-- When trained on this dataset <i>without</i> label conditioning, our WaveGAN and SpecGAN models learn to generate coherent words. Results are arranged into numerical ordering by post-hoc labeling of random examples by the classifier discussed in the paper. -->
             <ul>
 
@@ -105,7 +105,7 @@
                 <li>
                 <span class="desc">
                   
-                  <b>SpecGAN + AdVoc</b>
+                  <b>MelSpecGAN + AdVoc</b>
 
                 </span>
                 <div class="example">
