@@ -17,13 +17,13 @@
         <h1>Expediting TTS Synthesis with Adversarial Vocoding</h1>
         <h3><a href="https://paarthneekhara.github.io">*Paarth Neekhara</a>, <a href="https://chrisdonahue.github.io">*Chris Donahue</a>, <a href="http://msp.ucsd.edu">Miller Puckette</a>, <a href="http://dub.ucsd.edu">Shlomo Dubnov</a>, <a href="http://cseweb.ucsd.edu/~jmcauley/">Julian McAuley</a> </h3>
         <p style="width: 80%">
-            We present sound examples for our experiments in "Expediting TTS Synthesis with Adversarial Vocoding". 
-            Each mel-spectrogram is vocoded using different methods and we present the vocoded audio for 5 such randomly selected mel-spectrogram representations from the <a href="https://keithito.com/LJ-Speech-Dataset/"> LJ Speech Dataset</a>. Additionally, we present TTS examples for vocoding <a href="https://arxiv.org/abs/1712.05884">Tacotron-2</a> generated mel-spectrograms for some jokes.
+	We present sound examples for the experiments in our paper <i>Expediting TTS Synthesis with Adversarial Vocoding</i>. Sound files on this page were synthesized by vocoding mel spectrograms using various methods including our own. These mel spectrograms were extracted either from real waveforms (from the <a href="https://keithito.com/LJ-Speech-Dataset/">LJ Speech Dataset</a>) or synthesized by a state-of-the-art TTS system (<a href="https://arxiv.org/abs/1712.05884">Tacotron-2</a>).
         </p>
 
         <div class = "divexamples" id = "Inversion">
-            <h2>Ablation study: magnitude and phase estimation</h2>
-            <p style="width: 80%">Sound examples for ablating the heuristics for magnitude and phase estimation for vocoding mel spectrograms. It can be observed that coupling an ideal estimation of phase or magnitude with a heuristic for the other yields audio quality that is marginally worse than the original audio.</p>
+		<h2>(Table 1) Examining the effects of magnitude and phase estimation heuristics</h2>
+		<p style="width: 80%">These examples correspond to Table 1 from our paper. Here we are examining the effects of common techniques used in heuristic-based vocoding of mel spectrograms. Specifically, we mix and match different heuristics for performing <i>magnitude estimation</i> (converting log-frequency mel spectrograms into linear-frequency magnitude spectrograms) and <i>phase estimation</i> (estimating phase for the magnitude spectrogram). Each row in this table is labeled with the two methods used for both estimation problems (e.g. "Mel pseudoinverse + Griffin-Lim" uses the pseudoinverse of the mel basis to perform magnitude estimation, and Griffin-Lim to reconstruct phase for this estimated magnitude).</p>
+		<p>We observe that coupling an ideal solution (using real data as as proxy) to one subproblem with a reasonable heuristic for the other (rows 3 and 4) results in reasonable speech. Of the two, we target magnitude estimation in this work and use Local Weighted Sums (<a href="https://pypi.org/project/lws/">LWS</a>) as a phase estimator. Hence, row 3 therefore represents the upper bound on quality that our method hopes to achieve.</p>
             <table id = "InversionTable">
               <tr class = "theader">
               </tr>
@@ -91,7 +91,7 @@
 
                 <li>
                 <span class="desc">
-                  <a href="https://arxiv.org/abs/1802.04208">SpecGAN + Griffin Lim</a>
+                  <a href="https://arxiv.org/abs/1802.04208">SpecGAN + Griffin-Lim</a>
                 </span>
                 <div class="example">
                   <audio controls>
@@ -192,7 +192,7 @@
         fillTable('#InversionTable', 
             'audio/Inversion', 
             ['Real', 'Mag_GL', 'Mag_LWS', 'Mel_Phase', 'Mel_GL', 'Mel_LWS'],
-            ['Real Mag + Real Phase (Original)', 'Real Mag + Griffin Lim', 'Real Mag + LWS', 'Mel psuedoinverse + Real Phase', 'Mel psuedoinverse + Griffin Lim', 'Mel psuedoinverse + LWS'],
+            ['Real Mag + Real Phase (Original)', 'Real Mag + Griffin-Lim', 'Real Mag + LWS', 'Mel psuedoinverse + Real Phase', 'Mel psuedoinverse + Griffin-Lim', 'Mel psuedoinverse + LWS'],
             tts_texts
             )
 
