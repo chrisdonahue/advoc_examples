@@ -9,8 +9,9 @@
               border: 1px solid black;
             }
             td {width: 250px;}
-            audio { width: 250px; }
+            /*audio { width: 400px; }*/
             .divexamples {padding-bottom: 30px;}
+            .class_audio {width: 250px;}
         </style>
     </head>
     <body>
@@ -124,7 +125,7 @@
 
     <script type="text/javascript">
         function fillTable(table_id, subFolder, methods, method_names, transcripts){
-            var audio_html_pre = '<audio controls><source src="'
+            var audio_html_pre = '<audio class="class_audio" controls><source src="'
             var audio_html_post = '" type="audio/wav">Your browser does not support the audio tag</audio>'
             $(table_id).find('.theader').append("<th>Method</th>");
             for(var j = 0; j < 4; j++){
